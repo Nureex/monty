@@ -11,16 +11,16 @@ void _push(stack_t **stack, __attribute__ ((unused)) unsigned int line_number)
 
     (void)line_number;
 
-    // Allocate memory for a new stack node
+    /* Allocate memory for a new stack node */
     top = malloc(sizeof(stack_t));
     if (top == NULL)
     {
-        // Print error message if malloc fails
+        /* Print error message if malloc fails */
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
     }
 
-    // Initialize the new node
+    /* Initialize the new node */
     top->n = var_global.push_arg;
     top->next = *stack;
     top->prev = NULL;
@@ -39,7 +39,7 @@ void _pall(stack_t **stack, __attribute__ ((unused)) unsigned int line_number)
     stack_t *runner;
 
     runner = *stack;
-    // Traverse the stack and print each element
+    /* Traverse the stack and print each element */
     while (runner != NULL)
     {
         printf("%d\n", runner->n);
@@ -57,14 +57,14 @@ void _pint(stack_t **stack, unsigned int line_number)
     stack_t *runner;
 
     runner = *stack;
-    // Check if the stack is empty
+    /* Check if the stack is empty */
     if (runner == NULL)
     {
-        // Print error message if the stack is empty
+        /* Print error message if the stack is empty */
         fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
         exit(EXIT_FAILURE);
     }
-    // Print the top element
+    /* Print the top element */
     printf("%d\n", runner->n);
 }
 
@@ -77,14 +77,14 @@ void _pop(stack_t **stack, unsigned int line_number)
 {
     stack_t *nodo = *stack;
 
-    // Check if the stack is empty
+    /* Check if the stack is empty */
     if (stack == NULL || *stack == NULL)
     {
-        // Print error message if the stack is empty
+        /* Print error message if the stack is empty */
         fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
-    // Remove the top element and update the stack
+    /* Remove the top element and update the stack */
     *stack = nodo->next;
     if (*stack != NULL)
         (*stack)->prev = NULL;
@@ -99,7 +99,7 @@ void free_dlistint(stack_t *head)
 {
     stack_t *tmp;
 
-    // Traverse the list and free each node
+    /* Traverse the list and free each node */
     while (head != NULL)
     {
         tmp = head->next;

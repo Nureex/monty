@@ -10,27 +10,27 @@ void _sub(stack_t **stack, unsigned int line_number)
     stack_t *tmp = *stack;
     int sub = 0, i = 0;
 
-    // Check if the stack is empty
+    /* Check if the stack is empty */
     if (tmp == NULL)
     {
         fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
         exit(EXIT_FAILURE);
     }
 
-    // Count the number of elements in the stack
+    /* Count the number of elements in the stack */
     while (tmp)
     {
         tmp = tmp->next;
         i++;
     }
 
-    // Check if there are fewer than two elements in the stack
+    /* Check if there are fewer than two elements in the stack */
     if (stack == NULL || (*stack)->next == NULL || i <= 1)
     {
         fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
         exit(EXIT_FAILURE);
     }
-    // Subtract the top element from the second top element and update the stack
+    /* Subtract the top element from the second top element and update the stack */
     sub = (*stack)->next->n - (*stack)->n;
     _pop(stack, line_number);
 
@@ -46,7 +46,7 @@ void _mul(stack_t **stack, unsigned int line_number)
 {
     int aux;
 
-    // Check if the stack has fewer than two elements
+    /* Check if the stack has fewer than two elements */
     if (*stack == NULL || (*stack)->next == NULL)
     {
         fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
@@ -72,7 +72,7 @@ void _div(stack_t **stack, unsigned int line_number)
 {
     int div = 0;
 
-    // Check if the stack has fewer than two elements or if division by zero is attempted
+    /* Check if the stack has fewer than two elements or if division by zero is attempted */
     if (*stack == NULL || (*stack)->next == NULL)
     {
         fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
@@ -106,7 +106,7 @@ void _mod(stack_t **stack, unsigned int line_number)
 {
     int mod = 0;
 
-    // Check if the stack has fewer than two elements or if division by zero is attempted
+    /* Check if the stack has fewer than two elements or if division by zero is attempted */
     if (*stack == NULL || (*stack)->next == NULL)
     {
         fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);

@@ -14,44 +14,44 @@ void read_file(char *filename, stack_t **stack)
     int check;
     int read;
 
-    // Open the file for reading
+    /* Open the file for reading */
     var_global.file = fopen(filename, "r");
 
-    // Check if file opening was successful
+    /* Check if file opening was successful */
     if (var_global.file == NULL)
     {
         fprintf(stderr, "Error: Can't open file %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
-    // Read each line of the file
+    /* Read each line of the file */
     while ((read = getline(&var_global.buffer, &i, var_global.file)) != -1)
     {
         line = parse_line(var_global.buffer, stack, line_count);
 
-        // Skip blank lines and comments
+        /* Skip blank lines and comments */
         if (line == NULL || line[0] == '#')
         {
             line_count++;
             continue;
         }
 
-        // Get the function corresponding to the opcode
+        /* Get the function corresponding to the opcode */
         s = get_op_func(line);
 
-        // Check if the opcode is valid
+        /* Check if the opcode is valid */
         if (s == NULL)
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_count, line);
             exit(EXIT_FAILURE);
         }
 
-        // Execute the function corresponding to the opcode
+        /* Execute the function corresponding to the opcode */
         s(stack, line_count);
         line_count++;
     }
 
-    // Free dynamically allocated memory and close the file
+    /* Free dynamically allocated memory and close the file */
     free(var_global.buffer);
     check = fclose(var_global.file);
     if (check == -1)
@@ -86,7 +86,7 @@ instruct_func get_op_func(char *str)
         {NULL, NULL},
     };
 
-    // Search for the opcode in the instruction array
+    /* Search for the opcode in the instruction array */
     i = 0;
     while (instruct[i].f != NULL && strcmp(instruct[i].opcode, str) != 0)
     {
@@ -135,12 +135,12 @@ char *parse_line(char *line, stack_t **stack, unsigned int line_number)
     (void)stack;
 
     push = "push";
-    // Tokenize the line to extract the opcode
+    /* Tokenize the line to extract the opcode */
     op_code = strtok(line, "\n ");
     if (op_code == NULL)
         return (NULL);
 
-    // If the opcode is "push", extract the argument and convert it to an integer
+    /* If the opcode is "push", extract the argument and convert it to an integer */
     if (strcmp(op_code, push) == 0)
     {
         arg = strtok(NULL, "\n ");
